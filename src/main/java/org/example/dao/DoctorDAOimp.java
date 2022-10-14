@@ -39,14 +39,14 @@ public class DoctorDAOimp implements DoctorDAO {
 
     @Override
     public void deleteDoctor(int id) throws SQLException {
-        String query = "DELETE FROM Doctor WHERE ID = " + id;
         try{
+            String query = "DELETE FROM Doctor WHERE ID = ?";
             connection.setAutoCommit(false);
             ps = connection.prepareStatement(query);
-            ps.execute(query);
-//            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, id);
+            ps.executeUpdate();
             connection.commit();
-            System.out.println("Registro Borrado correctamente");
+            System.out.println("Registro Borrado ID(" + id + ")");
         } catch (SQLException e){
             connection.rollback();
             e.printStackTrace();
@@ -55,16 +55,15 @@ public class DoctorDAOimp implements DoctorDAO {
 
     @Override
     public Doctor getDoctor(int id) {
-        String query = "SELECT * FROM Doctor WHERE ID = ?";
         Boolean check = false;
         Doctor d = new Doctor();
         try {
+            String query = "SELECT * FROM Doctor WHERE ID = ?";
             ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
-                check = true;
+            while(rs.next()) {
                 d.setID(rs.getInt("ID"));
                 d.setDni(rs.getString("DNI"));
                 d.setName(rs.getString("Name"));
@@ -72,6 +71,7 @@ public class DoctorDAOimp implements DoctorDAO {
                 d.setSalary(rs.getFloat("Salary"));
                 d.setSpeciality(rs.getString("Speciality"));
             }
+            check = true;
             rs.close();
         } catch (SQLException e){
             e.printStackTrace();
@@ -81,7 +81,6 @@ public class DoctorDAOimp implements DoctorDAO {
         }else{
             return null;
         }
-
     }
 
     @Override
@@ -110,16 +109,18 @@ public class DoctorDAOimp implements DoctorDAO {
 
     @Override
     public void updateDoctor(Doctor emp) throws SQLException {
-        String query = "UPDATE Doctors SET Name = ?, lastName = ?, DNI = ?, Speciality = ?, Salary = ?" +
-                "WHERE ID = " + emp.getID();
+        String query = "UPDATE Doctor SET Name = ?, lastName = ?, DNI = ?, Speciality = ?, Salary = ?" +
+                " WHERE ID = ?";
         try {
             connection.setAutoCommit(false);
             ps = connection.prepareStatement(query);
+            ps.setInt( 6 , emp.getID());
             ps.setString(1, emp.getName());
             ps.setString(2, emp.getLastName());
             ps.setString(3, emp.getDni());
             ps.setString(4, emp.getSpeciality());
             ps.setDouble(5, emp.getSalary());
+            ps.executeUpdate();
             connection.commit();
             System.out.println("Registro acualizado");
         } catch (SQLException e){
