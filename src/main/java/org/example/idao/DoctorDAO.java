@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface DoctorDAO {
+    /*Prueba Push*/
     public int addDoctor(Doctor emp) throws SQLException;
     public void deleteDoctor(int id) throws SQLException;
     public Doctor getDoctor(int id);
