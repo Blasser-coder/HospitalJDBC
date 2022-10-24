@@ -1,9 +1,13 @@
 package org.example.models;
 
+import java.util.List;
+
 public class Doctor {
     private int ID;
     private String Name, LastName, dni, speciality;
     private double Salary;
+
+    private List<Pacient> Patients;
 
     public Doctor() {
     }
@@ -75,6 +79,7 @@ public class Doctor {
                 ", dni='" + dni + '\'' +
                 ", speciality='" + speciality + '\'' +
                 ", Salary=" + Salary +
+                ", Patients=" + Patients +
                 '}';
     }
 }

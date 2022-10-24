@@ -129,4 +129,30 @@ public class DoctorDAOimp implements DoctorDAO {
             connection.rollback();
         }
     }
+
+    @Override
+    public Doctor getDoctorByPatientId(int patient_id) {
+        Doctor d = new Doctor();
+        String query = "Select Doctor.* from Patients INNER JOIN Doctor ON " +
+                "Patients.Doctor_ID = Doctor.ID where Patients.ID = ?";
+        try {
+            connection.setAutoCommit(false);
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, patient_id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                d = new Doctor(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getFloat(6)
+                );
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return d;
+    }
 }

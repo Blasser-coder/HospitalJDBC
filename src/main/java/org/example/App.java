@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.Repositories.PatientRepositoriesImp;
 import org.example.dao.DoctorDAOimp;
 import org.example.dao.PacientDAOimp;
 import org.example.idao.PacientDAO;
@@ -20,11 +21,18 @@ public class App
         List<Doctor> dd = new ArrayList<Doctor>();
         List<Pacient> pp = new ArrayList<Pacient>();
         DoctorDAOimp d = new DoctorDAOimp();
-        PacientDAOimp p= new PacientDAOimp();
-        Doctor d1 = new Doctor(1, "Paco", "Fiestas", "12345678J", "Dermatologia", 2000.0);
-        Pacient p1 = new Pacient(1, "Pepe", "Martinez", "12345678L", 23, "234567890", "Le duele el culo");
+        PacientDAOimp p = new PacientDAOimp();
+        PatientRepositoriesImp PRI = new PatientRepositoriesImp();
+        Doctor d1 = new Doctor();
+        Pacient p1 = new Pacient(7, "Pepe", "Martinez", "12345678L", 23, "234567890", "Le duele el culo");
+        d1 = d.getDoctorByPatientId(7);
+        System.out.println(d1.toString());
 
-        Doctor dp = new Doctor();
+        Pacient p11 = PRI.GetPatient(p1.getId());
+        System.out.println(p11.toString());
+
+
+        /*Doctor dp = new Doctor();
         Pacient pd = new Pacient();
         System.out.println("---------------------------------------------------------");
         d.addDoctor(d1);
@@ -67,5 +75,6 @@ public class App
         for (int i = 0; i < E.size(); i++) {
             System.out.println(E.get(i).toString());
         }
+    }*/
     }
 }

@@ -12,5 +12,6 @@ public interface DoctorDAO {
     public Doctor getDoctor(int id);
     public List<Doctor> getAllDoctors();
     public void updateDoctor(Doctor emp) throws SQLException;
+    public Doctor getDoctorByPatientId(int patient_id);
 
 }

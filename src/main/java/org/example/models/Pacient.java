@@ -8,6 +8,8 @@ public class Pacient {
     private String phone;
     private String disease;
 
+    private Doctor Doctor_ID;
+
     public Pacient() {
     }
 
@@ -77,6 +79,14 @@ public class Pacient {
         this.disease = disease;
     }
 
+    public Doctor getDoctor_ID() {
+        return Doctor_ID;
+    }
+
+    public void setDoctor_ID(Doctor doctor_ID) {
+        Doctor_ID = doctor_ID;
+    }
+
     @Override
     public String toString() {
         return "Pacient{" +
@@ -87,6 +97,7 @@ public class Pacient {
                 ", age=" + age +
                 ", phone='" + phone + '\'' +
                 ", disease='" + disease + '\'' +
+                ", Doctor_ID=" + Doctor_ID.getID() +
                 '}';
     }
 }
